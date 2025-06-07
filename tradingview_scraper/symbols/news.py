@@ -5,7 +5,12 @@ import json
 
 from bs4 import BeautifulSoup
 import requests
-import pkg_resources
+from importlib import resources
+
+
+def _resource_path(package: str, resource: str) -> str:
+    """Return the path to a resource bundled within the package."""
+    return str(resources.files(package).joinpath(resource))
 
 
 from tradingview_scraper.symbols.utils import save_csv_file, save_json_file, generate_user_agent
@@ -298,7 +303,7 @@ class NewsScraper:
         Raises:
             IOError: If there is an error reading the file.
         """
-        path = pkg_resources.resource_filename('tradingview_scraper', 'data/languages.json')
+        path = _resource_path('tradingview_scraper', 'data/languages.json')
         if not os.path.exists(path):
             print(f"[ERROR] Languages file not found at {path}.")
             return []
@@ -320,7 +325,7 @@ class NewsScraper:
         Raises:
             IOError: If there is an error reading the file.
         """
-        path = pkg_resources.resource_filename('tradingview_scraper', 'data/exchanges.txt')
+        path = _resource_path('tradingview_scraper', 'data/exchanges.txt')
         if not os.path.exists(path):
             print(f"[ERROR] Exchanges file not found at {path}.")
             return []
@@ -342,7 +347,7 @@ class NewsScraper:
         Raises:
             IOError: If there is an error reading the file.
         """
-        path = pkg_resources.resource_filename('tradingview_scraper', 'data/news_providers.txt')
+        path = _resource_path('tradingview_scraper', 'data/news_providers.txt')
         if not os.path.exists(path):
             print(f"[ERROR] News provider file not found at {path}.")
             return []
@@ -364,7 +369,7 @@ class NewsScraper:
         Raises:
             IOError: If there is an error reading the file.
         """
-        path = pkg_resources.resource_filename('tradingview_scraper', 'data/areas.json')
+        path = _resource_path('tradingview_scraper', 'data/areas.json')
         if not os.path.exists(path):
             print(f"[ERROR] Areas file not found at {path}.")
             return []

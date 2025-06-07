@@ -399,6 +399,14 @@ res = calendar_scraper.scrape_dividends(
   )
 ```
 
+### 8. Live Crypto News Script
+Run the `crypto_news_live.py` script to print fresh headlines for the top
+10 cryptocurrencies.
+
+```bash
+python crypto_news_live.py
+```
+
 ## Changes:
 - Release `0.4.9`:
   Add [documentation](https://mnwato.github.io/tradingview-scraper/)
