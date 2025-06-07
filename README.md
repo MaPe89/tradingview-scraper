@@ -400,8 +400,8 @@ res = calendar_scraper.scrape_dividends(
 ```
 
 ### 8. Live Crypto News Script
-Run the `crypto_news_live.py` script to print fresh headlines for the top
-10 cryptocurrencies.
+Run the `crypto_news_live.py` script to continuously print the latest
+headlines and body text for the top 10 cryptocurrencies.
 
 ```bash
 python crypto_news_live.py

@@ -31,7 +31,21 @@ def main():
                     seen[symbol].add(news_id)
                     published = item.get("published_datetime", item.get("published"))
                     title = item.get("title")
-                    print(f"{symbol} | {published} | {title}")
+                    story_path = item.get("storyPath")
+                    body_text = ""
+                    if story_path:
+                        try:
+                            content = scraper.scrape_news_content(story_path=story_path)
+                            parts = [
+                                b.get("content", "")
+                                for b in content.get("body", [])
+                                if b.get("type") == "text"
+                            ]
+                            body_text = "\n".join(parts)
+                        except Exception as exc:
+                            body_text = f"Error fetching body: {exc}"
+
+                    print(f"{symbol} | {published} | {title}\n{body_text}")
         time.sleep(300)
 
 
