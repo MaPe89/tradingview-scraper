@@ -1,7 +1,12 @@
 from typing import List, Dict
-import pkg_resources
+from importlib import resources
 import json
 import os
+
+
+def _resource_path(package: str, resource: str) -> str:
+    """Return the path to a resource bundled within the package."""
+    return str(resources.files(package).joinpath(resource))
 
 
 class OHLCVConverter:
@@ -122,7 +127,7 @@ class OHLCVConverter:
         Returns:
             dict: A dictionary of timeframes loaded from the file. Returns a dict with '1d' as default.
         """
-        path = pkg_resources.resource_filename('tradingview_scraper', 'data/timeframes.json')
+        path = _resource_path('tradingview_scraper', 'data/timeframes.json')
         if not os.path.exists(path):
             print(f"[ERROR] Timeframe file not found at {path}.")
             return {"1d": None}
